@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href= "style.css" type= "text/css" rel= "stylesheet">
+    <script type= "http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <title> My Pics </title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id= "navbar">
+    <header class= "header">
+        <div id="hi">
+          <img id= "logo" src= "actual atom logo.png"></a>
+            <h1>Rohan Bafna</h1>
+        </div>
+        <div class= "leftsidelist">
+            <ul>
+                <a href= "rohan.html"><li class= "home">Home</li></a>
+                <a href= "pics.html"><li class= "about">My pics</li></a>
+                <a href= "projects.html"><li class= "projects">My Projects</li></a>
+            </ul>
+        </div>
+    </header>
+  </div>
+    <!-- Slideshow container -->
+<div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 13</div>
+          <img src="sunset.jpg" style="width:100%">
+          <div class="text">here are some of my pics!</div>
+        </div>
+      
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 13</div>
+          <img src="city.jpg" style="width:100%">
+          <div class="text">overlooking over city</div>
+        </div>
+      
+        <div class="mySlides fade">
+          <div class="numbertext">3 / 13</div>
+          <img src="cloud.jpg" style="width:100%">
+          <div class="text">Lake Brienz in swiss cheese</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">4 / 13</div>
+          <img src="falls.jpg" style="width:100%">
+          <div class="text">niagra falls ripoff</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext"> 5 / 13</div>
+          <img src="fallsleaves.jpg" style="width:100%">
+          <div class="text">Rhine Falls but different</div>
+        </div>
+        <!--
+        <div class="mySlides fade">
+          <div class="numbertext">6 / 13</div>
+          <img src="flowerriver.jpg" style="width:100%">
+          <div class="text">wow...lake thun flowing</div>
+        </div>
+
+        
+        <div class="mySlides fade">
+          <div class="numbertext">7 / 13</div>
+          <img src="flowertower.jpg" style="width:100%">
+          <div class="text">towers and flowers</div>
+        </div>
+        -->
+
+        <div class="mySlides fade">
+          <div class="numbertext">8 / 13</div>
+          <img src="mountain1.jpg" style="width:100%">
+          <div class="text">mount tetnis shot</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">9 / 13</div>
+          <img src="poofclouds.jpg" style="width:100%">
+          <div class="text">large hills</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">10 / 13</div>
+          <img src="riverland.jpg" style="width:100%">
+          <div class="text">small ocean brienz</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">11 / 13</div>
+          <img src="mountaincloud.jpg" style="width:100%">
+          <div class="text">i have the high ground</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">12 / 13</div>
+          <img src="riverside.jpg" style="width:100%">
+          <div class="text">the ground is lava but beautiful</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">13 / 13</div>
+          <img src="riverview.jpg" style="width:100%">
+          <div class="text">lake thun thun thunnnnnnn</div>
+        </div>
+      
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
+      
+      <script>
+          var slideIndex = 1;
+          showSlides(slideIndex);
+          
+          // Next/previous controls
+          function plusSlides(n) {
+            showSlides(slideIndex += n);
+          }
+          
+          // Thumbnail image controls
+          function currentSlide(n) {
+            showSlides(slideIndex = n);
+          }
+          
+          function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+          }
+      </script>
+</body >
+</html>
