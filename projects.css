@@ -22,17 +22,17 @@ ul{
 }
 
 .header {
-    font-family: "quicksand";
-    position: relative;
-    left: 20px;
-    bottom: 70px;
+  font-family: "quicksand";
+  position: relative;
+  left: 10px;
+  bottom: 70px;
 
 }
 
 .leftsidelist {
-  position: relative;
-  top: 10px;
-  right: 25px;
+position: relative;
+top: 10px;
+left: 35px;
 }
 
 #logo {

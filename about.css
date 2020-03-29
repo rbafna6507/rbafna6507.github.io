@@ -37,7 +37,7 @@ h3 {
 .header {
     font-family: "quicksand";
     position: relative;
-    left: 20px;
+    left: 30px;
     bottom: 70px;
 
 }
@@ -45,7 +45,7 @@ h3 {
 .leftsidelist {
   position: relative;
   top: 10px;
-  right: 25px;
+  left: 45px;
 }
 
 .home {
@@ -59,7 +59,6 @@ h3 {
 #navbar {
   position: relative;
   top: 30px;
-  left: 20px;
   
 }
 
@@ -94,7 +93,7 @@ a:active {
     display: inline-block;
     position: relative;
     left: 50px;
-    bottom: 50px;
+    bottom: 30px;
     font-family: "quicksand";
 }
 
