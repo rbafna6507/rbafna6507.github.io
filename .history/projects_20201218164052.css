@@ -1,0 +1,126 @@
+* {box-sizing:border-box}
+
+li{
+  display: inline;
+  list-style-type: none;
+  text-align: left;
+  padding-left: 30px;
+  font-size: 18px;
+  font-weight: 36px;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  left: 970px;
+  bottom: 60px;
+}
+
+ul{
+  display: inline;
+  margin: 10px 0px;
+  padding: 0;
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  font-family: "quicksand";
+  position: relative;
+  left: 10px;
+  bottom: 40px;
+}
+
+.leftsidelist {
+  position: relative;
+  top: 10px;
+  left: 45px;
+}
+
+#logo {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 70px;
+    bottom: 400px;
+  }
+
+  h1 {
+
+    padding-left: 50px;
+    font-size: 36px;
+    position: relative;
+    right: 5px;
+}
+  .home {
+    padding-bottom: 30px;
+  }
+
+  .about {
+    padding-bottom: 30px;
+  }
+
+  #navbar {
+    position: relative;
+    left: 20px;
+  }
+
+  a:link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:hover {
+    color: #ce321e
+  }
+  
+  a:active {
+    color: #ce321e
+  }
+
+  .project{
+      display: inline;
+      font-family: "quicksand";
+      position: relative;
+      font-weight: normal;
+      left: 80px;
+      padding-top: 5px;
+      font-size: 18px;
+  }
+
+  #informate{
+    position: relative;
+    bottom: 70px;
+  }
+
+  #hangman{
+    position: relative;
+    bottom: 190px;
+  }
+
+  #password{
+    position: relative;
+    bottom: 30px;
+  }
+
+  #automation{
+    position:relative;
+    bottom: 10px;
+  }
+
+  h4{
+    display: inline;
+    font-weight: normal;
+  }
+
+  .imgs{
+    display: inline;
+    position: relative;
+    left: 400px;
+    height: 400px;
+    width: 500px;
+  }

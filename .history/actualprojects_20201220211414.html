@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="circular actual atom logo.png"/>
+    <title>my projects</title>
+    <link href= "projects.css" type= "text/css" rel= "stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id= "navbar">
+        <header class= "header">
+            <div id="hi">
+              <a href= "index.html"><h3>Rohan Bafna</h3></a>
+            </div>
+            <div class= "leftsidelist">
+                <ul>
+                    <a href= "pics.html"><li class= "about">My pics</li></a>
+                    <a href= "actualprojects.html"><li class= "projects">My Projects</li></a>
+                </ul>
+            </div>
+        </header>
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-4">
+            <div id = "informate" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
+                <h3><strong>Informate</strong></h3>
+                <p>12.18.2020</p>
+                <p style="font-size: 18px;"><a href = "https://newsaggregator-frontend.vercel.app"><u>Informate</u></a> scrapes news <a href = "https://github.com/rbafna6507/newsaggregator_scraper"><u>articles from the home pages</u></a> of <br>several popular news outlets and displays them in real time <br>by pinging a <a href = "https://github.com/rbafna6507/newsaggregator_backend"><u>self-made API</u>.</a></p>
+            </div>
+            <br><br>
+            <div id = "password" class = "small" onmouseover="document.getElementById('password_img').style.visibility = 'visible';" onmouseout = "document.getElementById('password_img').style.visibility = 'hidden';">
+                <h3><strong>Password Manager</strong></h3>
+                <p>9.3.2020</p>
+                <p style="font-size: 18px;">Locally hashes, stores, and retrieves passwords, usernames, and <br>URLs at a push of a button. This also helped reinforce the basics of<br>python. View my beginner-esque code <a href = "https://github.com/rbafna6507/passwordstorageproject"><u>here</u></a></p>
+            </div>
+            <br><br>
+            <div id = "hangman" class = "small" onmouseover="document.getElementById('hangman_img').style.visibility = 'visible';" onmouseout = "document.getElementById('hangman_img').style.visibility = 'hidden';">
+                <h3><strong>Hang-py</strong></h3>
+                <p>7.24.2020</p>
+                <p style="font-size: 18px;">The <a href = "https://github.com/rbafna6507/hangmanpython"><u>game of hangman</u></a> developed in python. This gave me an <br>understanding of the logical processes and steps needed to code <br>well.</p>
+            </div>
+            <br><br>
+            <div id = "automation" class = "small">
+                <h3><strong>Automation</strong></h3>
+                <p>8.9.2020</p>
+                <p style="font-size: 18px;">Automated the sending of emails and texts as well as the <br>filling out of Google Forms through Flask and Heroku.</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <img id = "informate_img" class = "imgs" src = "informate_pic.png">
+            <img id = "hangman_img" class = "imgs" src = "hangman_pic.png">
+            <img id = "password_img" class = "imgs" src = "password_pic.png">
+        </div>
+      </div>
+</body>
+</html>

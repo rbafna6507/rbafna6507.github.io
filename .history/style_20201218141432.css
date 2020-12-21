@@ -1,0 +1,186 @@
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  bottom: 100px;
+  right: 350px;
+  float: right;
+  height: 540px;
+  width: 1070px;
+  box-sizing: border-box;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: 50px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #000000;
+  font-size: 22px;
+  padding: 8px 12px;
+  position: relative;
+  bottom: 410px;
+  left: 700px;
+  width: 100%;
+  text-align: center;
+  font-family: "quicksand";
+}
+
+/* Number text (1/11 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+h1 {
+
+    padding-left: 50px;
+    font-size: 36px;
+    position: relative;
+    right: 5px;
+
+}
+
+li{
+  display: block;
+  list-style-type: none;
+  text-align: left;
+  padding-left: 30px;
+  font-size: 18px;
+  font-weight: 36px;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  left: 370px;
+  bottom: 60px;
+}
+
+ul{
+  margin: 10px 0px;
+  padding: 0;
+  text-align: center;
+  position: relative;
+}
+
+p {
+    display: block;
+
+}
+
+.header {
+  font-family: "quicksand";
+  position: relative;
+  left: 10px;
+  bottom: 70px;
+}
+
+img {
+    position: relative;
+    top: 28px;
+    height: 600px;
+    width: 1000px;
+    border-radius: 6%;
+}
+
+.leftsidelist {
+position: relative;
+top: 10px;
+left: 85px;
+}
+
+.home {
+  padding-bottom: 30px;
+}
+
+.about {
+  padding-bottom: 30px;
+}
+
+#navbar {
+  position: relative;
+  top: 30px;
+  left: 20px;
+  
+}
+
+#logo {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 70px;
+  bottom: 400px;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #ce321e
+}
+
+a:active {
+  color: #ce321e
+}
+
+html {
+  height: 770px;
+}

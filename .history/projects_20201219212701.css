@@ -1,0 +1,182 @@
+* {box-sizing:border-box}
+
+div{
+  display: inline;
+}
+
+li{
+  display: inline;
+  list-style-type: none;
+  text-align: left;
+  padding-left: 30px;
+  font-size: 18px;
+  font-weight: 36px;
+  width: 150px;
+  display: inline-block;
+  position: relative;
+  left: 970px;
+  bottom: 60px;
+}
+
+ul{
+  display: inline;
+  margin: 10px 0px;
+  padding: 0;
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  font-family: "quicksand";
+  position: relative;
+  left: 10px;
+  bottom: 40px;
+}
+
+.leftsidelist {
+  position: relative;
+  top: 10px;
+  left: 45px;
+}
+
+#logo {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 70px;
+    bottom: 400px;
+  }
+
+  h1 {
+
+    padding-left: 50px;
+    font-size: 36px;
+    position: relative;
+    right: 5px;
+}
+  .home {
+    padding-bottom: 30px;
+  }
+
+  .about {
+    padding-bottom: 30px;
+  }
+
+  #navbar {
+    position: relative;
+    left: 20px;
+  }
+
+  a:link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:hover {
+    color: #ce321e
+  }
+  
+  a:active {
+    color: #ce321e
+  }
+
+  .project{
+      font-family: "quicksand";
+      position: relative;
+      font-weight: normal;
+      left: 80px;
+      padding-top: 5px;
+      font-size: 18px;
+      display: inline;
+  }
+
+  #informate{
+    position: relative;
+    bottom: 60px;
+    width: 100px;
+  }
+
+  #hangman{
+    position: relative;
+    bottom: 550px;
+  }
+
+  #password{
+    position: relative;
+    bottom: 1050px;
+  }
+
+  body:not(.mobile) #informate:hover #informate_img {
+    visibility: visible;
+}
+
+  #informate_img{
+    position: relative;
+    bottom: 60px;
+    left: 650px;
+    display:inline;
+    visibility: hidden;
+  }
+  .imgs{
+    height: 500px;
+    width: 650px;
+    display: inline-block;
+  }
+  h4{
+    font-weight: normal;
+  }
+
+  #hangman_img{
+    position: relative;
+    bottom: 260px;
+    left: 650px;
+    display:inline;
+    visibility: hidden;
+  }
+
+  body:not(.mobile) #hangman:hover #hangman_img {
+    visibility: visible;
+}
+
+  #password_img{
+    position: relative;
+    bottom: 440px;
+    left: 650px;
+    display:inline;
+    visibility: hidden;
+  }
+
+  body:not(.mobile) #password:hover #password_img {
+    visibility: visible;
+}
+  #automation{
+    position: relative;
+    bottom: 1550px;
+  }
+
+  h4{
+    background-size: 200% 200%;
+    background-image:linear-gradient(to top, #f7f7f7 50%, transparent 50%);
+    -webkit-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+    -moz-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+    -ms-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+    -o-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+    transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+}
+
+  h4:hover {color: black;
+background-image:
+linear-gradient(to top, #f7f7f7 51%, transparent 50%);
+background-position: 0 100%;
+-webkit-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+-moz-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+-ms-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+-o-transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+transition: background-position 300ms, color 300ms ease, border-color 300ms ease;
+}
