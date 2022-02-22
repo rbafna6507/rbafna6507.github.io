@@ -1,12 +1,67 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="shortcut icon" type="image/png" href="circular actual atom logo.png"/>
     <title>my projects</title>
-    <link href= ".history/projects_20201220150600.css" type= "text/css" rel= "stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+    <link href= "projects.css" type= "text/css" rel= "stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p>Heroku/Flask emails sent!</p>
+    <nav class = "navbar container-fluid" style = "padding-top: 30px">
+        <a class = "navbar-brand" href= "index.html" style = "padding-left:15px"><h3>Rohan Bafna</h3></a>
+        <ul class = "navbar-text ml-auto" style = "padding-right:50px; font-size:18px"><a href = "projects.html">My Projects</a></ul>
+    </nav>
+    <div class="row justify-content-start">
+        <div class="col">
+            <div id = "jamshidi" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
+                <h4><b>Research @ UofSC</b></h4>
+                <p>[1.28.21 - Present]</p>
+                <p style = "font-size: 14px;">Used Tensorflow to create, modify, and quantize machine learning models for conversion and deployment onto microcontrollers to experimentally pinpoint the distribution that yields maximum accuracy and throughput.
+            </p>
+            </div>
+                <br><br>
+            <div id = "clemson" class = "small"  onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
+                <h4><b>Intern @ CU-ICAR</b></h4>
+                <p>[6.01.2021 - 8.20.2021]</p>
+                <p style="font-size: 14px;">Studied and recreated key discoveries and concepts behind computer vision (from MNIST to YOLOv3) and its current applications in the automotive industry: self-driving, lane-keep assist, and cabin monitoring to further automotive research.</p>
+            </div>
+            <br><br>
+            <div id = "informate" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
+                <h4><b>Informate</b></h4>
+                <p>[12.18.2020]</p>
+                <p style="font-size: 14px;"><a href = "https://informate.vercel.app" target = "_blank"><u>Informate</u></a> scrapes news <a href = "https://github.com/rbafna6507/newsaggregator_scraper" target = "_blank"><u>articles from the home pages</u></a> of several popular news outlets and displays them in real time by pinging a <a href = "https://github.com/rbafna6507/newsaggregator_backend" target = "_blank"><u>self-made API</u>.</a></p>
+            </div>
+        </div>
+        <div class="col">
+            <div id = "password" class = "small" onmouseover="document.getElementById('password_img').style.visibility = 'visible';" onmouseout = "document.getElementById('password_img').style.visibility = 'hidden';">
+                <h4><b>Password Manager</b></h4>
+                <p>[9.3.2020]</p>
+                <p style="font-size: 14px;">Locally hashes, stores, and retrieves passwords, usernames, and URLs at a push of a button. This also helped reinforce the basics of python. View my beginner-esque code <a href = "https://github.com/rbafna6507/passwordstorageproject" target = "_blank"><u>here</u></a>.</p>
+            </div>
+            <br><br>
+            <div id = "hangman" class = "small" onmouseover="document.getElementById('hangman_img').style.visibility = 'visible';" onmouseout = "document.getElementById('hangman_img').style.visibility = 'hidden';">
+                <h4><b>HangPy</b></h4>
+                <p>[7.24.2020]</p>
+                <p style="font-size: 14px;">The <a href = "https://github.com/rbafna6507/hangmanpython" target = "_blank"><u>game of hangman</u></a> developed in python. This gave me an understanding of the logical processes and steps needed to code well.</p>
+            </div>
+            <br><br>
+            <div id = "automation" class = "small" onmouseover="document.getElementById('password_img').style.visibility = 'visible';" onmouseout = "document.getElementById('password_img').style.visibility = 'hidden';">
+                <h4><b>Automation</b></h4>
+                <p>[8.9.2020]</p>
+                <p style="font-size: 14px;">Automated the sending of emails and texts as well as the filling out of Google Forms through Flask and Heroku. Delivered weekly volunteer opportunities and frequent advertisements for clubs/organizations.</p>
+            </div>
+        </div>
+        <!-- <div class="col-md-auto">
+            <img id = "informate_img" class = "imgs" src = "informate_pic.png">
+            <p id = "informate_img" style="font-size: 14px;">Used Tensorflow to create and quantize machine learning models. Converted and deployed individual layers onto microcontrollers to experimentally pinpoint the distribution that yields maximum accuracy and throughput. Peep some of my Jupyter Notebooks</p>
+            <img id = "hangman_img" class = "imgs" src = "hangman_pic.png">
+            <img id = "password_img" class = "imgs" src = "password_pic.png">
+            <p id = "informate_img" style="font-size: 14px;">Used Tensorflow to create and quantize machine learning models. Converted and deployed individual layers onto microcontrollers to experimentally pinpoint the distribution that yields maximum accuracy and throughput. Peep some of my Jupyter Notebooks</p>
+            <img id = "automation_img" class = "imgs" src = "automation_pic.png">
+        </div> -->
+      </div>
 </body>
 </html>
