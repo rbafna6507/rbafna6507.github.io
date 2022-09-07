@@ -11,6 +11,17 @@ h1 {
 
 }
 
+#me {
+  position: absolute;
+  left: 57%;
+  bottom: .1%;
+  height: auto; 
+  width: auto; 
+  max-width: 600px; 
+  max-height: 600px;
+}
+
+
 li{
     display: inline;
     list-style-type: none;
