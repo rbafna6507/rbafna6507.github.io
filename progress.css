@@ -1,0 +1,126 @@
+* {box-sizing:border-box}
+
+/* @import url(//fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap); */
+* {font-family: 'IBM Plex Mono', monospace;}
+
+h1 {
+    padding-left: 50px;
+    font-size: 36px;
+    position: relative;
+    right: 5px;
+
+}
+
+img {
+  position: absolute;
+  left: 57%;
+  bottom: .1%;
+  height: auto; 
+  width: auto; 
+  max-width: 600px; 
+  max-height: 600px;
+}
+
+
+li{
+    display: inline;
+    list-style-type: none;
+    text-align: left;
+    padding-left: 30px;
+    font-size: 18px;
+    font-weight: 36px;
+    width: 150px;
+    display: inline-block;
+    position: relative;
+    left: 970px;
+    bottom: 60px;
+}
+
+/* ul{
+    display: inline;
+    margin-left: 150px;
+    margin-bottom: -20px;
+    text-align: center;
+    position: relative;
+    top:15px;
+} */
+
+/* h3 {
+    display: block;
+    font-weight: normal;
+    margin-left: 30px;
+} */
+/* 
+.header {
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+    margin-right: 30px;
+    margin-bottom: 70px;
+} */
+
+.leftsidelist {
+  position: relative;
+  top: 10px;
+}
+
+.home {
+  padding-bottom: 30px;
+}
+
+.about {
+  padding-bottom: 30px;
+}
+
+/* #navbar {
+  position: relative;
+  top: 30px;
+
+} */
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: underline;
+  color: black;
+}
+
+a:hover {
+  color: #ce321e
+}
+
+a:active {
+  color: #ce321e
+}
+
+h5{
+  font-size: 16px;
+}
+.aboutme {
+    display: inline-block;
+    position: relative;
+    left: 50px;
+    bottom: 15px;
+    width: 750px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+
+html {
+    width: 1420px;
+}
+
+#contactme {
+    display: inline-block;
+    position: relative;
+    left: 50px;
+    bottom: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    text-decoration: underline;
+}
