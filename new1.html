@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Rohan's Introduction</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Test Signifier';
+        }
+        .intro-section {
+            background-color: #fefff8;
+            color: #000;
+            padding: 1rem 1rem 2rem;
+            /* overflow: hidden; */
+        }
+        .header-text {
+            font-family: 'ABC Whyte Inktrap Semi-Mono', -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .scrolling-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 20s linear;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+        .name-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .name-text {
+            font-family: 'Test Signifier', sans-serif;
+            font-size: 9rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .profile-image {
+            position: absolute;
+            right: 0;
+            bottom: -3rem;
+            width: 22.125rem;
+            height: auto;
+            z-index: 1;
+        }
+        .content-container {
+            position: relative;
+            z-index: 2;
+            font-family: 'Test Signifier', sans-serif;
+            font-size: 3.75rem;
+            /* margin-bottom: 3rem; */
+        }
+        .interests-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .interest-text {
+            margin-bottom: 0.75rem;
+        }
+        .interest-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4.875rem;
+            height: auto;
+            border-radius: 0.875rem;
+        }
+        .robotics-text {
+            margin-top: 3.75rem;
+        }
+        .robotics-icon {
+            position: absolute;
+            bottom: -1.5rem;
+            right: 0;
+            width: 3.875rem;
+            height: auto;
+            border-radius: 0.25rem;
+        }
+        .study-text {
+            margin-top: 1.5rem;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .study-info {
+            flex: 1 1 auto;
+            position: relative;
+        }
+        .study-icon {
+            position: absolute;
+            top: -2.5rem;
+            left: 5rem;
+            width: 3.625rem;
+            height: auto;
+            border-radius: 0.4375rem;
+        }
+        .resume-link {
+            font-family: 'ABC Whyte Inktrap Semi-Mono', -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 1.25rem;
+            color: #000;
+            text-decoration: none;
+        }
+        .navigation {
+            font-family: 'ABC Whyte Inktrap Semi-Mono', -apple-system, Roboto, Helvetica, sans-serif;
+            font-size: 1.25rem;
+            text-align: right;
+        }
+        .navigation a {
+            color: #000;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 991px) {
+            .name-text {
+                font-size: 3.5rem;
+            }
+            .content-container,
+            .study-text {
+                font-size: 2.25rem;
+            }
+            .profile-image {
+                width: 50%;
+                bottom: -1rem;
+            }
+            .robotics-text {
+                margin-top: 1.75rem;
+            }
+            .study-icon {
+                top: -1.75rem;
+                left: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="intro-section">
+        <header>
+            <h2 class="header-text" aria-label="Repeating hello text">
+                <div class="scrolling-text">hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・hello・</div>
+            </h2>
+        </header>
+        <div class="name-container">
+            <h1 class="name-text">hi, i'm rohan.</h1>
+            <img src="http://b.io/ext_13-" alt="" class="profile-image" loading="lazy">
+        </div>
+        <div class="content-container">
+            <div class="interests-wrapper">
+                <p class="interest-text">
+                    i like making things<span style="color: #53a9c4;">¹</span>
+                </p>
+                <img src="http://b.io/ext_14-" alt="" class="interest-icon" loading="lazy">
+                <p class="robotics-text">
+                    i'm interested in robotics<span style="color: #be95be;">²</span>
+                </p>
+                <img src="http://b.io/ext_15-" alt="" class="robotics-icon" loading="lazy">
+                <p class="study-text">
+                    im a third year studying ce @ uofm<span style="color: #b3be62;">³</span>
+                </p>
+            </div>
+        </div>
+        <footer class="footer-container">
+            <div class="study-info">
+                <img src="http://b.io/ext_16-" alt="" class="study-icon" loading="lazy">
+                <a href="#" class="resume-link">resume</a>
+            </div>
+            <nav class="navigation">
+                <a href="#about">about me</a>
+                <a href="#projects">projects</a>
+                <a href="#contact">contact</a>
+            </nav>
+        </footer>
+    </section>
+</body>
+</html>

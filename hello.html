@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuous Scrolling Text</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .scrolling-text-container {
+            white-space: nowrap;
+            display: flex;
+            animation: scroll 10s linear infinite;
+        }
+
+        .scrolling-text {
+            font-size: 2em;
+            padding: 0 20px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scrolling-text-container">
+        <div class="scrolling-text" style="font-family: Arial;">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Courier New';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Times New Roman';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Georgia';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Verdana';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Comic Sans MS';">Hello</div>
+        <div class="scrolling-text" style="font-family: Arial;">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Courier New';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Times New Roman';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Georgia';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Verdana';">Hello</div>
+        <div class="scrolling-text" style="font-family: 'Comic Sans MS';">Hello</div>
+    </div>
+</body>
+</html>
