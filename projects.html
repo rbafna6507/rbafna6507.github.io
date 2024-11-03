@@ -1,74 +1,103 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>my projects</title>
-    <link href= "projects.css" type= "text/css" rel= "stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/projects.css">
+    <!-- <link rel="stylesheet" href="styles/test.css"> -->
+    <title>My Playground of Projects</title>
 </head>
 <body>
-    <nav class = "navbar container-fluid" style = "padding-top: 30px">
-        <a class = "navbar-brand" href= "index.html" style = "padding-left:15px"><h3>Rohan Bafna</h3></a>
-        <ul class = "navbar-text ml-auto" style = "padding-right:50px; font-size:18px"><a href = "projects.html">My Work</a></ul>
-    </nav>
-    <div class="row justify-content-start">
-        <div class="col">
-            <div id = "bold_metrics" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
-                <h4><b>Intern @ Bold Metrics</b></h4>
-                <p>[05.20.2022 - Present]</p>
-                <p style="font-size: 14px;">Developed a new CLI for clients to upload size charts to our PostgreSQL database. Performed comparative data analyses on client inventories, categorizing products with similar sizing to use the same prediction models.</p>
+    <div class="container">
+        <h1>projects</h1>
+        
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Self-Balancing Robotic Cube </h3>
+                <h4>[in progress]</h4>
+                <p class="project-desc">Currently hacking on a triple reaction wheel system that can balance a cube on a single corner. 
+                    Implementing a PID system for balance, learning how to 3D print for the cube body, and getting my feet wet with basic mechanical engineering skills. 
+                    Attempting to reverse engineer this <a href="https://www.youtube.com/watch?v=n_6p-1J551Y" target="_blank">Cubli</a>, a closed source self-balancing cube.</p>
             </div>
-            <br><br>
-            <div id = "jamshidi" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
-                <h4><b>Research @ UofSC</b></h4>
-                <p>[1.28.21 - 9.30.21]</p>
-                <p style = "font-size: 14px;">Used Tensorflow to create, modify, and quantize machine learning models. Experimentally deployed layers these models to microcontrollers to pinpoint the distribution that yields maximum accuracy.
-            </p>
-            </div>
-                <br><br>
-            <div id = "clemson" class = "small"  onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
-                <h4><b>Intern @ CU-ICAR</b></h4>
-                <p>[6.01.2021 - 8.20.2021]</p>
-                <p style="font-size: 14px;">Recreated and re-ran popular machine learning models in both MatLab and TensorFlow in Python to dive deep into the differences of each new model, compare ease of use, modularity, and speed of both platforms.</p>
-            </div>
-            <br><br>
         </div>
-        <div class="col">
-            <div id = "informate" class = "small" onmouseover="document.getElementById('informate_img').style.visibility = 'visible';" onmouseout = "document.getElementById('informate_img').style.visibility = 'hidden';">
-                <h4><b>Informate</b></h4>
-                <p>[12.18.2020]</p>
-                <p style="font-size: 14px;"><a href = "https://informate.vercel.app" target = "_blank"><u>Informate</u></a> scrapes news <a href = "https://github.com/rbafna6507/newsaggregator_scraper" target = "_blank"><u>articles from the home pages</u></a> of several popular news outlets and displays them in real time by pinging a <a href = "https://github.com/rbafna6507/newsaggregator_backend" target = "_blank"><u>self-made API</u>.</a></p>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Simulated Robot Pathfinding using A*</h3>
+                <h4>[September 2024]</h4>
+                <p class="project-desc">Built a simulation using PyBullet's physics engine to explore different pathfinding algorithms 
+                    in the context of robotics. Created an A* and Rapidly Exploring Random Trees (RRT) algorithm visualizer to inspect
+                    how the robot behaves under each enviornment across different paths and through obstacles. beep boop, code here.</p>
             </div>
-            <br><br>
-            <div id = "password" class = "small" onmouseover="document.getElementById('password_img').style.visibility = 'visible';" onmouseout = "document.getElementById('password_img').style.visibility = 'hidden';">
-                <h4><b>Password Manager</b></h4>
-                <p>[9.3.2020]</p>
-                <p style="font-size: 14px;">Locally hashes, stores, and retrieves passwords, usernames, and URLs at a push of a button. This also helped reinforce the basics of python. View my beginner-esque code <a href = "https://github.com/rbafna6507/passwordstorageproject" target = "_blank"><u>here</u></a>.</p>
-            </div>
-            <br><br>
-            <div id = "hangman" class = "small" onmouseover="document.getElementById('hangman_img').style.visibility = 'visible';" onmouseout = "document.getElementById('hangman_img').style.visibility = 'hidden';">
-                <h4><b>HangPy</b></h4>
-                <p>[7.24.2020]</p>
-                <p style="font-size: 14px;">The <a href = "https://github.com/rbafna6507/hangmanpython" target = "_blank"><u>game of hangman</u></a> developed in python. This gave me an understanding of the logical processes and steps needed to code well.</p>
-            </div>
-            <!-- <br><br> -->
-            <!-- <div id = "automation" class = "small" onmouseover="document.getElementById('password_img').style.visibility = 'visible';" onmouseout = "document.getElementById('password_img').style.visibility = 'hidden';">
-                <h4><b>Automation</b></h4>
-                <p>[8.9.2020]</p>
-                <p style="font-size: 14px;">Automated the sending of emails and texts as well as the filling out of Google Forms through Flask and Heroku. Delivered weekly volunteer opportunities and frequent advertisements for clubs/organizations.</p>
-            </div> -->
         </div>
-        <!-- <div class="col-md-auto">
-            <img id = "informate_img" class = "imgs" src = "informate_pic.png">
-            <p id = "informate_img" style="font-size: 14px;">Used Tensorflow to create and quantize machine learning models. Converted and deployed individual layers onto microcontrollers to experimentally pinpoint the distribution that yields maximum accuracy and throughput. Peep some of my Jupyter Notebooks</p>
-            <img id = "hangman_img" class = "imgs" src = "hangman_pic.png">
-            <img id = "password_img" class = "imgs" src = "password_pic.png">
-            <p id = "informate_img" style="font-size: 14px;">Used Tensorflow to create and quantize machine learning models. Converted and deployed individual layers onto microcontrollers to experimentally pinpoint the distribution that yields maximum accuracy and throughput. Peep some of my Jupyter Notebooks</p>
-            <img id = "automation_img" class = "imgs" src = "automation_pic.png">
-        </div> -->
-      </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Advanced RISC-V Processor Simulation </h3>
+                <h4>[March 2024 - June 2024]</h4>
+                <p class="project-desc">Prototyped an advanced out of order RISC-V processor design using the R10K architecture. 
+                    Equipped the processor with register renaming, data forwarding, early branch resolution, an N-way superscalar, 
+                    as well as handling for data/structural hazards. Code here.</p>
+            </div>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Flight Path Optimization </h3>
+                <h4>[August 2023]</h4>
+                <p class="project-desc">Implemented flight path optimization in Python using the A* path finding algorithm on the OpenFlights 
+                    dataset, containing 67,663 unique routes, 3,321 airports, and 548 airlines. Built a real-time map-based visualizer 
+                    and Next.js frontend to inspect flight route optimization based on distance traveled,
+                    fuel consumption, time taken, and overall environmental impact. peep the code.</p>
+            </div>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Quadcopter from Scratch</h3>
+                <h4>[October 2022 - February 2023]</h4>
+                <p class="project-desc"> Designed, wired, and programmed a quadcopter from scratch. Created my own remote controller 
+                    using NRF24L01 modules, built a custom flight controller (PID system), and laser cut the drone body. 
+                    Inaugural flight ended in a devastating crash.</p>
+            </div>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Algorithmic Lo-Fi Music Generator </h3>
+                <h4>[in-progress]</h4>
+                <p class="project-desc">Used Javascript (Tone.js + Next.js) to create algorithmically generated Lo-Fi music. Learning quite a bit of music theory
+                    (chords, progressions), and how to dial in timing to create pleasantly sounding Lo-Fi. code coming soon.
+                </p>
+            </div>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Informate </h3>
+                <h4>[2021]</h4>
+                <p class="project-desc">Informate scrapes news articles from the home pages of several popular news outlets and displays them in real time by pinging a self-made API.
+                </p>
+            </div>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> HangPy </h3>
+                <h4>[2020]</h4>
+                <p class="project-desc">A perfect beginner project. The game of hangman developed in python. This gave me an understanding of the logical processes and steps needed to code well. Became a hangman GOAT.</p>
+            </div>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html" style="color: #00000070">ABOUT</a></li>
+                <li><a href="projects.html">PROJECTS</a></li>
+                <li><a href="https://drive.google.com/file/d/1ro1nn89a2zY4YsYY4DvYNHNaCwGL3Wgg/view?usp=sharing" style="color: #00000070">RESUME</a></li>
+            </ul>
+        </nav>
+        
+        <!-- <div class="more-projects">more projects !</div> -->
+    </div>
 </body>
 </html>

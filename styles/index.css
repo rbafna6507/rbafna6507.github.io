@@ -1,0 +1,162 @@
+@font-face {
+    font-family: 'Signifier';
+    src: url('signifier-bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ABC';
+    src: url('ABCWhyteInktrapSemi-Mono-Regular.woff') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'ABC', serif;
+    background-color: #FEFFF8;
+    color: #000;
+    line-height: 1.6;
+    padding: 0 1rem;
+    max-width: 900px;
+    margin: 0 5rem;
+    margin-bottom: 0;
+    margin-left: 5rem;
+    margin-right: 10rem;
+    margin-top: 0;
+    /* max-height: 500px; */
+}
+
+h1 {
+    font-family: 'Signifier', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 4rem;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 3rem 2rem;
+}
+
+.content h2 {
+    font-weight: normal;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.content p {
+    margin: 0 0 1rem 0;
+}
+
+.content a {
+    color: #000;
+    /* text-decoration: underline; */
+}
+
+nav {
+    position: fixed;
+    top: 20em;
+    right: 2rem;
+    /* margin-top:  */
+    margin-right: 3.5em;
+    text-align: right;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+    text-decoration-color: black;
+    -o-transition:.4s;
+    -ms-transition:.4s;
+    -moz-transition:.4s;
+    -webkit-transition:.4s;
+    transition:.4s;
+}
+
+/* nav li {
+    margin-bottom: 0.5rem;
+} */
+
+nav a {
+    font-family: 'ABC', sans-serif;
+    /* text-decoration: underline; */
+}
+
+/* nav a:hover {
+    text-decoration: underline;
+} */
+
+footer {
+    /* margin-top: 50%; */
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    /* margin-top: 2rem; */
+    font-size: 0.8rem;
+    color: #666;
+}
+
+
+
+@media (max-width: 868px) {
+    body {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .content h2 {
+        margin-bottom: 0.5rem;
+    }
+
+    nav {
+        margin-left: 0;
+        top: 2em;
+        display: inline;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-left: 0;
+    }
+
+
+
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .content {
+        gap: 1rem;
+    }
+
+}
