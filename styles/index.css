@@ -57,7 +57,7 @@ h1 {
 }
 
 nav {
-    position: fixed;
+    position: absolute;
     top: 20em;
     right: 2rem;
     /* margin-top:  */
@@ -100,9 +100,13 @@ nav a {
 
 footer {
     /* margin-top: 50%; */
-    position: absolute;
+    position: absolute; 
+    /* bottom: 0;  */
+    padding-top: 9%;
+    left:10px;
+    /* position: absolute;
     bottom: 0;
-    left: 10px;
+    left: 10px; */
     /* margin-top: 2rem; */
     font-size: 0.8rem;
     color: #666;
