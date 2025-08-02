@@ -57,7 +57,11 @@ h1 {
 p {
     font-size: 14px;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
+}
+
+li {
+    line-height: 1.6;
 }
 
 .project-box::after {
@@ -96,7 +100,6 @@ nav {
     position: fixed;
     top: 20em;
     right: 2rem;
-    /* margin-top:  */
     margin-right: 3.5em;
     text-align: right;
 }
@@ -108,14 +111,12 @@ nav ul {
 }
 
 nav li {
-    /* margin-bottom: 0.5rem; */
     font-family: 'ABC';
 } 
 
 
 nav a {
     font-family: 'ABC', sans-serif;
-    /* text-decoration: underline; */
 }
 
 li a:hover {
@@ -126,6 +127,16 @@ li a:hover {
     -moz-transition:.4s;
     -webkit-transition:.4s;
     transition:.4s;
+}
+
+.love {
+    position:absolute;
+    top:100vh;
+    transform:translateY(-100%);
+    width:100%;
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 10px;
 }
 
 /* nav a:hover {

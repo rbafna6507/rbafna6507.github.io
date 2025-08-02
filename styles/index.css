@@ -100,16 +100,28 @@ nav a {
 
 footer {
     /* margin-top: 50%; */
-    position: absolute; 
+    position: relative; 
     /* bottom: 0;  */
-    padding-top: 9%;
-    left:10px;
+    /* padding-top: 9%; */
+    /* top: 100%; */
+    /* left:10px; */
     /* position: absolute;
     bottom: 0;
     left: 10px; */
-    /* margin-top: 2rem; */
+    /* margin-top: auto; */
+    font-size: 0.6rem;
+    color: #666;
+}
+
+.love {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
     font-size: 0.8rem;
     color: #666;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
 }
 
 
