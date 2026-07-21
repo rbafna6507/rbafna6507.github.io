@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Rocket Lander</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0a0d2b; }
+    canvas { display: block; width: 100%; height: 100%; outline: none; }
+  </style>
+</head>
+<body>
+  <!-- macroquad renders into this canvas (id must be "glcanvas") -->
+  <canvas id="glcanvas" tabindex="1"></canvas>
+
+  <!-- miniquad/macroquad JS loader (vendored so there's no external dependency) -->
+  <script src="mq_js_bundle.js"></script>
+  <script>
+    load("rocket.wasm")
+    // give the canvas keyboard focus so WASD / P / SPACE work
+    window.addEventListener("load", () => document.getElementById("glcanvas").focus());
+    document.getElementById("glcanvas").addEventListener("click", (e) => e.target.focus());
+  </script>
+</body>
+</html>
