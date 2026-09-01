@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>an anatomy of see you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f0ead9;
+    --paper:     #faf6ed;
+    --plate-bg:  #ede5cf;
+    --ink:       #2a2218;
+    --ink-soft:  #6b5a45;
+    --rule:      #c9bfa9;
+    --rule-soft: #ddd3bc;
+    --accent:    #8b2e2e;
+    --serif: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --mono:  'JetBrains Mono', 'Courier New', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(60,45,25,0.04) 1px, transparent 0),
+      radial-gradient(circle at 8px 12px, rgba(60,45,25,0.025) 1px, transparent 0);
+    background-size: 6px 6px, 18px 18px;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    font-family: var(--serif);
+    color: var(--ink);
+  }
+
+  /* ── THE STACK (holds the deck of full-page cards) ── */
+  .stack {
+    position: relative;
+    width:  min(97vw, 1120px);
+    height: min(91vh, 860px);
+    opacity: 0;
+    animation: fadein 0.65s ease forwards 0.08s;
+  }
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── A CARD = A WHOLE PAGE (photo + notes) ── */
+  .page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: row;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.03), 0 32px 64px -24px rgba(60,45,25,0.30);
+    overflow: hidden;
+    /* NB: no permanent will-change / backface-visibility here — leaving cards
+       promoted to their own GPU layers left ghost-paint of the connector lines
+       after transforms. Let the browser composite normally. */
+    /* transform / z-index / opacity / filter / pointer-events set from JS per slot */
+    transition:
+      transform 0.52s cubic-bezier(0.34, 0.12, 0.22, 1),
+      opacity   0.45s ease,
+      filter    0.45s ease;
+  }
+
+  /* ── LEFT PLATE ── */
+  .col-plate {
+    flex-shrink: 0;
+    position: relative;
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    max-width: 54%;
+    background: var(--plate-bg);
+    border-right: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  /* corner bracket decoration */
+  .col-plate::before, .col-plate::after,
+  .col-plate > .corners-i::before, .col-plate > .corners-i::after {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink);
+    z-index: 50;
+    pointer-events: none;
+  }
+  .col-plate::before         { top: 8px;  left: 8px;  border-right: 0; border-bottom: 0; }
+  .col-plate::after          { top: 8px;  right: 8px; border-left:  0; border-bottom: 0; }
+  .col-plate > .corners-i::before { bottom: 8px; left: 8px;  border-right: 0; border-top: 0; }
+  .col-plate > .corners-i::after  { bottom: 8px; right: 8px; border-left:  0; border-top: 0; }
+
+  .col-plate > img {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88%;
+    height: auto;
+    filter: contrast(0.96) saturate(0.91);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* overlay: hotspots / labels / connectors */
+  .overlay { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
+  .hs-layer, .label-layer { position: absolute; inset: 0; }
+
+  .connectors {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Hotspots */
+  .hs {
+    position: absolute;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: auto;
+    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+    transform: translate(-50%, -50%);
+  }
+  .hs::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px dashed var(--rule);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .hs:hover::after, .hs.active::after { opacity: 1; }
+  .hs:hover  { transform: translate(-50%, -50%) scale(1.1); }
+  .hs.active { background: var(--ink); color: var(--paper); }
+
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(42,34,24,0.26); }
+    70%  { box-shadow: 0 0 0 8px rgba(42,34,24,0); }
+    100% { box-shadow: 0 0 0 0 rgba(42,34,24,0); }
+  }
+  .hs.unvisited { animation: pulse-ring 2.6s ease-out infinite; }
+
+  /* Side labels */
+  .label {
+    position: absolute;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 4;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .label.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .label .num {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-right: 5px;
+  }
+  .label.active .num { color: var(--rule); }
+
+  /* ── RIGHT NOTES PANEL ── */
+  .col-notes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .col-notes::before {
+    content: '';
+    position: absolute;
+    top: 2rem; bottom: 2rem; left: 0;
+    width: 1px;
+    background: var(--rule-soft);
+    pointer-events: none;
+  }
+
+  .notes-head { padding: 1.5rem 2rem 0 2rem; flex-shrink: 0; }
+  .meta-row {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .pre-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    margin-top: 0.6rem;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .divider { display: flex; align-items: center; margin: 1.2rem 0 0; gap: 0.75rem; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .divider span {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--ink-soft);
+  }
+
+  .notes-body {
+    flex: 1;
+    padding: 1.6rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .note-empty { text-align: center; color: var(--ink-soft); }
+  .note-empty p { font-size: 0.95rem; font-style: italic; line-height: 1.6; }
+  .note-empty .hint-sub {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  .note-active { display: none; }
+  .note-active.visible { display: block; animation: noteIn 0.28s cubic-bezier(0.22,1,0.36,1); }
+  @keyframes noteIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .note-fig {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .note-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 0.9rem;
+    color: var(--ink);
+  }
+  .note-body {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 38ch;
+    overflow-y: auto;
+    white-space: pre-line;   /* honor \n line breaks written in the body text */
+  }
+  .note-body.tender {
+    font-style: italic;
+    padding-left: 0.85rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ── TENDER TAKEOVER — a heartfelt note fills the entire card ── */
+  .tender-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 45;
+    display: none;
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(60,45,25,0.03) 1px, transparent 0);
+    background-size: 6px 6px;
+    overflow-y: auto;
+    padding: clamp(2rem, 6vw, 5rem) clamp(2rem, 7vw, 6rem);
+  }
+  .tender-overlay.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: noteIn 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .tender-inner {
+    width: 100%;
+    max-width: 78ch;      /* wide, letter-across-the-page measure */
+  }
+  .tender-overlay .note-fig {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+  .tender-overlay .note-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    margin-bottom: 1.4rem;
+    color: var(--ink);
+  }
+  .tender-overlay .note-body.tender {
+    max-width: none;
+    font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+    line-height: 1.8;
+    padding-left: 1.1rem;
+  }
+  .tender-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    line-height: 1;
+    font-size: 20px;
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .tender-close:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .notes-foot { padding: 0 2rem 1.5rem 2rem; flex-shrink: 0; }
+  .fig-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.1rem; }
+  .fig-chip {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background 0.14s, border-color 0.14s, color 0.14s;
+  }
+  .fig-chip:hover        { border-color: var(--ink); color: var(--ink); }
+  .fig-chip.visited      { background: var(--rule-soft); color: var(--ink); border-color: var(--rule); }
+  .fig-chip.chip-active  { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .all-read {
+    display: none;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.82rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.65rem;
+    animation: fadein 0.7s ease;
+  }
+  footer {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ── DECK NAV (fixed, outside the flying cards) ── */
+  .deck-nav {
+    position: fixed;
+    left: 50%; bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 4px 6px;
+    box-shadow: 0 8px 22px -8px rgba(60,45,25,0.4);
+  }
+  .nav-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-btn:hover { background: var(--ink); color: var(--paper); }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+  .nav-btn:disabled:hover { background: transparent; color: var(--ink); }
+  .nav-ind {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    min-width: 3.6em;
+    text-align: center;
+    user-select: none;
+  }
+
+  /* ── MOBILE FALLBACK — collapse the deck to just the front page ── */
+  @media (max-width: 700px) {
+    html, body { overflow: auto; height: auto; }
+    body { padding: 1rem 0.75rem 5rem; align-items: flex-start; }
+    .stack { width: 100%; height: auto; }
+    .page {
+      position: relative;
+      inset: auto;
+      flex-direction: column;
+      transform: none !important;
+      filter: none !important;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      box-shadow: none;
+      transition: opacity 0.3s ease;
+      pointer-events: auto;
+    }
+    .page.front {
+      opacity: 1;
+      max-height: none;
+      overflow: visible;
+      box-shadow: 0 32px 64px -24px rgba(60,45,25,0.3);
+    }
+    .col-plate {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .col-plate > img { width: 80%; }
+    .col-notes { flex: none; }
+    .notes-head, .notes-body, .notes-foot { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .notes-body { padding-top: 1.25rem; padding-bottom: 0.5rem; min-height: 180px; }
+    .note-empty, .note-active { display: block !important; }
+    .note-active:not(.visible) { opacity: 0.35; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stack" id="stack"><!-- full-page cards generated here --></div>
+
+<div class="deck-nav">
+  <button class="nav-btn" id="prev-btn" aria-label="previous volume">&lsaquo; prev</button>
+  <span class="nav-ind" id="deck-ind">1 / 1</span>
+  <button class="nav-btn" id="next-btn" aria-label="next volume">next &rsaquo;</button>
+</div>
+
+<script>
+  /* ════════════════════════════════════════════════════════════
+     VOLUMES — the whole deck is driven from this array.
+     Each entry is one full-page card (photo + its own notes).
+     To add a volume: drop the image in the repo, append an object.
+     ════════════════════════════════════════════════════════════ */
+  const VOLUMES = [
+    {
+      photo: "siyu.jpg",
+      meta:  { vol: "i", specimen: "001" },
+      pre:   "a study in",
+      title: 'an <em>anatomy</em> of <b>see you</b>',
+      sub:   "a field guide, conducted with great affection",
+      plate: "plate i",
+      hotspots: [
+        { top:"19%", left:"48%", label:"the forehead",   ltop:"15%", lside:"left",
+          body:"huge. gargantuan. almost infinite. despite the sheer volume and our nightly wrestling match, when you're sleepy and nestle your head just under my neck it truly is one of the best things that exist in the known world. ", // i feel your head nestled in my neck when you're sleepy and i have decided, formally, that this is the best thing that exists in the known world.",
+          tender:false },
+        { top:"26%", left:"68%", label:"the lashes",      ltop:"22%", lside:"right",
+          body:"abnormally long. weaponized. dangerous. too many have been lost in the bed, under the nighstand, and stuck to my fingers after painfully prying them off of your eyelids. ",
+          tender:false },
+        { top:"37%", left:"27%", label:"the spectacles",  ltop:"33%", lside:"left",
+          body:"known to be impossible to keep clean, particularly when I step within 5 feet of you. without these, you wouldn't be able to see me, and i wouldn't be able to see you. what a sad thought.",
+          tender:false },
+        { top:"48%", left:"47%", label:"the tongue",      ltop:"44%", lside:"right",
+          body:"deployed in 73% of photographs. studies show a strong correlation between this gesture and dangerous levels of retardation. would (/could) not have you any other way. ",
+          tender:false },
+        { top:"64%", left:"71%", label:"the shoulders",   ltop:"61%", lside:"right",
+          body:"small, and clearly reminiscent of their former muscular selves. they tend to breakout at the slightest hint of sunlight, dust, alcohol, or rohan. they also happen to be the solace that my head gravitates towards after 7pm, in bed, or as we're entering a food coma together.",
+          tender:false },
+        { top:"74%", left:"36%", label:"the hands",       ltop:"67%", lside:"left",
+          body:"so many rings, my precious. \n\nwarm, gentle, and supple as they run across my back and through my hair. nothing makes me feel cozier than your hands around me. speaking of, can you do me a favor 🥺? \n\nDANGER: also known to, at times, be ice cold, devious, and send shivers through my body. I cannot trust the wielder of these hands after nightly face washes.",
+          tender:false }
+      ]
+    },
+
+
+    {
+      photo: "second.jpg",
+      meta:  { vol: "ii", specimen: "002" },
+      pre:   "a study in",
+      title: 'see you later',
+      sub:   "documented while see you was asleep",
+      plate: "plate ii",
+      hotspots: [
+        { top:"35%", left:"40%", label:"the eyes -_-",   ltop:"30%", lside:"left",  body:"known to have no companion eye brows'. impossible to discern whether they are open or closed. despite the small size, they remain extremely expressive. clear disinterest in most engineering topics I bring up, but light up with joy when presented with dinner. ", tender:false },
+        { top:"60%", left:"45%", label:"the nose (or lack of)",   ltop:"45%", lside:"right", body:"almost non-existent. remarkably flat. despite this, its shape is somehow optimal for my own nose (especially when kissing heh). for some reason i don't know, my finger seems drawn to exploring it.... we'll see how far up i can get next time.", tender:false },
+        { top:"75%", left:"40%", label:"my own arm?", ltop:"72%", lside:"left",  body:"my own arm. it is believed to be true that in between my arms is your favorite resting place. i love it too. you'll still have to fight for it though. ps. thank you for the sweater :)", tender:false }
+      ]
+    },
+    {
+      photo: "third.jpg", 
+      meta:  { vol: "iii", specimen: "003" },
+      pre:   "a study in",
+      title: 'sihyu keh lol',
+      sub:   "noted while deleting a pear",
+      plate: "plate iii",
+      hotspots: [
+        { top:"28%", left:"55%", label:"derangement",   ltop:"24%", lside:"right", body:"at times you can be completely delusional and determined (in a good way, i swear). the largest tell for this is your eyes - here they're completely consumed by a single mission: maximizing consumption of pears. in a way, thats what makes you so talented + skilled at what you do. your singlemindedness + ability to chase down your goals genuinely inspires me. i'll only say this once - you're pretty fucking cool. kinda crazy tho...", tender:false },
+        { top:"62%", left:"15%", label:"MY hoodie",   ltop:"75%", lside:"left",  body:"this is my hoodie. thief. just remember you're wearing my hoodie. take good care of it.", tender:false },
+        { top:"70%", left:"58%", label:"pears", ltop:"66%", lside:"right", body:"your diet would exclusively be pears if they were nutritious enough. you're obsessed. you need help. i can help you get it. what is so good about pears???? pear things are fiiiiine but like really? they're not THAT good. i guess i can learn to love pears now that you do. ", tender:false }
+      ]
+    },
+    {
+      photo: "fourth.jpg", 
+      meta:  { vol: "iv", specimen: "004" },
+      pre:   "a study in",
+      title: 'skylar ge',
+      sub:   "observed under emotional distress",
+      plate: "plate iv",
+      hotspots: [
+        { top:"41%", left:"32%", label:"swollen eyes",   ltop:"28%", lside:"left",  body:"your eyes seem to get swollen pretty often. seems to coincide with seeing me. i wonder why?\n\nseriously though - i'm sorry if anything i've said or done has hurt you (outside of the biting, that's fair game). i love seeing you smile and hearing your laugh - it means the world to me seeing you happy. region of interest 2 helps quite a bit.", tender:false },
+        { top:"45%", left:"62%", label:"bottle o' gin",   ltop:"51%", lside:"right", body:"unbelievably useful. who knew that gin can help you on the outside like it helps you on the inside. aren't you resourceful.\n\nwe've shared so many drinks - from your first retreat where I had to constantly angel ragecage for you to our near daily bills pushes and glasses of wine as we cook dinner. it's a simple joy and i love that we do it together. want to grab a drink sometime?", tender:false }
+      ]
+    },
+    {
+      photo: "end.JPG", 
+      meta:  { vol: "v", specimen: "005" },
+      pre:   "a study in",
+      title: 'siyu <3',
+      sub:   "a complete picture",
+      plate: "plate v",
+      hotspots: [
+        { top:"62%", left:"52%", label:"the heart",       ltop:"58%", lside:"left",
+          body:"Warm. Comfortable. Cozy. Safe. Over the last 24 months that's how you've made me feel almost every moment we spend together - in bed feasting on Madras, cuddled up in your arms, or even when we we're out past 4am working on north campus. Even through all the relentless bullying you put me through, you make me feel seen - every quirk, complaint, unfunny joke, and eyebooger. You're patient, kind, beautiful, and caring - your deep hugs where I set my chin on your shoulder, feel your hands running across my back + up through my hair, and smell your sweet perfume let me forget everything on my mind and let me be truly still - with you. The last 2 years have been so so special - every early night in, every late night wrestling match, every sideways glance of hunger. Here's to two more? \n\nlove you very much <3. see you soon.",
+          tender:true },
+        { top:"60%", left:"75%", label:"my jacket pt.2", ltop:"68%", lside:"right", body:"oh look, my jacket. can't beleive you kept this one too.", tender:false }
+      ]
+    }
+  ];
+
+  const N   = VOLUMES.length;
+  const DUR = 540;               // must match the .page transform transition (0.52s + margin)
+
+  // where a page flies to as it's tossed off the deck — up & to the right
+  // (mirror for prev). tweak these two to change the feel of the throw.
+  const THROW_NEXT = 'translate(52%, -74%) rotate(8deg) scale(1.04)';
+  const THROW_PREV = 'translate(-52%, -74%) rotate(-8deg) scale(1.04)';
+
+  let active      = 0;
+  let isAnimating = false;
+
+  const stackEl = document.getElementById('stack');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const deckInd = document.getElementById('deck-ind');
+
+  const el = (tag, cls, html) => {
+    const n = document.createElement(tag);
+    if (cls)  n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  };
+  const figLabel = i => 'FIG. ' + (i + 1);
+
+  /* ── Build one full-page card, fully self-contained ──────────
+     Each card owns its hotspots, notes, chips and visited state,
+     so nothing leaks across volumes and there are no id clashes. */
+  function buildCard(v) {
+    const card = el('div', 'page');
+
+    // LEFT: plate
+    const plate = el('div', 'col-plate');
+    plate.appendChild(el('span', 'corners-i'));
+    const img = el('img');
+    img.src = v.photo;
+    img.alt = 'volume ' + v.meta.vol;
+    plate.appendChild(img);
+
+    const overlay = el('div', 'overlay');
+    overlay.innerHTML =
+      '<svg class="connectors" viewBox="0 0 100 100" preserveAspectRatio="none">' +
+      '<line class="conn" stroke="#6b5a45" stroke-width="0.35" stroke-dasharray="1.3 1.7" ' +
+      'x1="0" y1="0" x2="0" y2="0" opacity="0" stroke-linecap="round"/></svg>';
+    const lblLayer = el('div', 'label-layer');
+    const hsLayer  = el('div', 'hs-layer');
+    overlay.appendChild(lblLayer);
+    overlay.appendChild(hsLayer);
+    plate.appendChild(overlay);
+    card.appendChild(plate);
+
+    // RIGHT: notes
+    const notes = el('div', 'col-notes');
+    notes.innerHTML =
+      '<div class="notes-head">' +
+        '<div class="meta-row"><span>vol. ' + v.meta.vol + ' &mdash; specimen no. ' + v.meta.specimen + '</span><span>field guide</span></div>' +
+        '<div class="pre-title">' + v.pre + '</div>' +
+        '<h1>' + v.title + '</h1>' +
+        '<p class="subtitle">' + v.sub + '</p>' +
+        '<div class="divider"><span>' + v.plate + '</span></div>' +
+      '</div>' +
+      '<div class="notes-body">' +
+        '<div class="note-empty"><p>tap any numbered point on the plate to read the field note.</p>' +
+        '<span class="hint-sub">observations logged over many months</span></div>' +
+        '<div class="note-active"><div class="note-fig"></div><div class="note-title"></div><p class="note-body"></p></div>' +
+      '</div>' +
+      '<div class="notes-foot">' +
+        '<div class="all-read">all field notes read.</div>' +
+        '<div class="fig-chips"></div>' +
+        '<footer>compiled with love &middot; ongoing study</footer>' +
+      '</div>';
+    card.appendChild(notes);
+
+    // FULL-CARD overlay for tender entries — a long, heartfelt note gets the
+    // whole page to breathe instead of the narrow right-hand column.
+    const tender = el('div', 'tender-overlay');
+    tender.innerHTML =
+      '<button class="tender-close" aria-label="close">&times;</button>' +
+      '<div class="tender-inner">' +
+        '<div class="note-fig"></div>' +
+        '<div class="note-title"></div>' +
+        '<p class="note-body tender"></p>' +
+      '</div>';
+    card.appendChild(tender);
+
+    // element refs (scoped to THIS card)
+    const conn      = card.querySelector('.conn');
+    const chipsWrap = card.querySelector('.fig-chips');
+    const noteEmpty = card.querySelector('.note-empty');
+    const noteActive= card.querySelector('.note-active');
+    const noteFig   = card.querySelector('.note-fig');
+    const noteTitle = card.querySelector('.note-title');
+    const noteBody  = card.querySelector('.note-body');
+    const allRead   = card.querySelector('.all-read');
+    const tFig      = tender.querySelector('.note-fig');
+    const tTitle    = tender.querySelector('.note-title');
+    const tBody     = tender.querySelector('.note-body');
+
+    const visited = new Set();
+    let activeId  = null;
+
+    function drawConnector(hsEl, lblEl) {
+      const sr  = plate.getBoundingClientRect();
+      const hsr = hsEl.getBoundingClientRect();
+      const lr  = lblEl.getBoundingClientRect();
+      const toX = r => ((r.left + r.width  / 2 - sr.left) / sr.width  * 100).toFixed(2);
+      const toY = r => ((r.top  + r.height / 2 - sr.top)  / sr.height * 100).toFixed(2);
+      conn.setAttribute('x1', toX(hsr)); conn.setAttribute('y1', toY(hsr));
+      conn.setAttribute('x2', toX(lr));  conn.setAttribute('y2', toY(lr));
+      conn.setAttribute('opacity', '0.6');
+    }
+
+    function updateChips() {
+      chipsWrap.querySelectorAll('.fig-chip').forEach(ch => {
+        const id = ch.dataset.id;
+        ch.classList.toggle('chip-active', id === activeId);
+        ch.classList.toggle('visited',     visited.has(id) && id !== activeId);
+      });
+    }
+
+    function handleSelect(id) {
+      if (activeId === id) { closeEntry(); return; }
+      const idx  = Number(id);
+      const h    = v.hotspots[idx];
+      const hsEl = hsLayer.querySelector(`.hs[data-id="${id}"]`);
+      const lblEl= lblLayer.querySelector(`.label[data-id="${id}"]`);
+
+      hsLayer.querySelectorAll('.hs').forEach(b => b.classList.remove('active'));
+      lblLayer.querySelectorAll('.label').forEach(l => l.classList.remove('active'));
+      hsEl.classList.add('active');
+      hsEl.classList.remove('unvisited');
+      lblEl.classList.add('active');
+
+      if (h.tender) {
+        // tender: take over the entire card
+        tFig.textContent   = figLabel(idx);
+        tTitle.textContent = h.label;
+        tBody.textContent  = h.body;
+        conn.setAttribute('opacity', '0');
+        noteActive.classList.remove('visible');
+        noteActive.style.display = 'none';
+        noteEmpty.style.display = 'block';
+        tender.classList.remove('visible');
+        void tender.offsetWidth;
+        tender.classList.add('visible');
+      } else {
+        tender.classList.remove('visible');
+        noteFig.textContent   = figLabel(idx);
+        noteTitle.textContent = h.label;
+        noteBody.textContent  = h.body;
+        noteBody.className     = 'note-body';
+
+        noteEmpty.style.display = 'none';
+        noteActive.classList.remove('visible');
+        noteActive.style.display = 'block';
+        void noteActive.offsetWidth;
+        noteActive.classList.add('visible');
+
+        drawConnector(hsEl, lblEl);
+      }
+
+      visited.add(id);
+      activeId = id;
+      updateChips();
+      if (visited.size === v.hotspots.length) allRead.style.display = 'block';
+    }
+
+    function closeEntry() {
+      hsLayer.querySelectorAll('.hs').forEach(b => b.classList.remove('active'));
+      lblLayer.querySelectorAll('.label').forEach(l => l.classList.remove('active'));
+      conn.setAttribute('opacity', '0');
+      // collapse the line to zero length so no stale geometry can be repainted
+      conn.setAttribute('x2', conn.getAttribute('x1'));
+      conn.setAttribute('y2', conn.getAttribute('y1'));
+      noteActive.style.display = 'none';
+      noteActive.classList.remove('visible');
+      tender.classList.remove('visible');
+      noteEmpty.style.display = 'block';
+      activeId = null;
+      updateChips();
+    }
+
+    // close the tender takeover from its × button
+    tender.querySelector('.tender-close')
+          .addEventListener('click', e => { e.stopPropagation(); closeEntry(); });
+
+    // populate hotspots, labels, chips
+    v.hotspots.forEach((h, i) => {
+      const id = String(i);
+
+      const hs = el('button', 'hs unvisited');
+      hs.dataset.id = id;
+      hs.style.top  = h.top;
+      hs.style.left = h.left;
+      hs.style.animationDelay = (i * 0.35) + 's';
+      hs.textContent = i + 1;
+      hs.addEventListener('click', e => { e.stopPropagation(); handleSelect(id); });
+      hsLayer.appendChild(hs);
+
+      const lbl = el('div', 'label', '<span class="num">' + figLabel(i) + '</span>' + h.label);
+      lbl.dataset.id = id;
+      lbl.style.top = h.ltop;
+      lbl.style[h.lside === 'right' ? 'right' : 'left'] = '2%';
+      lblLayer.appendChild(lbl);
+
+      const ch = el('button', 'fig-chip', 'fig. ' + (i + 1));
+      ch.dataset.id = id;
+      ch.addEventListener('click', () => handleSelect(id));
+      chipsWrap.appendChild(ch);
+    });
+
+    return { el: card, closeEntry, get activeId() { return activeId; } };
+  }
+
+  /* ── build the deck ── */
+  const controllers = VOLUMES.map(buildCard);
+  const cards = controllers.map(c => c.el);
+  cards.forEach(c => stackEl.appendChild(c));
+
+  /* Position one card purely from its slot (0 = front). */
+  function applySlot(i, slot) {
+    const c = cards[i];
+    const show = slot <= 3;
+    c.style.transform =
+      `translate(${slot * 14}px, ${slot * 12}px) rotate(${slot * 1.2}deg) scale(${(1 - slot * 0.02).toFixed(3)})`;
+    c.style.zIndex        = String(20 - slot);
+    c.style.opacity       = show ? '1' : '0';
+    // no filter on the front card — a filter (even brightness(1)) forces a
+    // separate compositing layer, which is what ghosted the connector lines.
+    c.style.filter        = slot === 0 ? 'none' : `brightness(${(1 - slot * 0.06).toFixed(3)})`;
+    c.style.pointerEvents = slot === 0 ? 'auto' : 'none';
+  }
+
+  function setFront(idx) {
+    cards.forEach((c, i) => c.classList.toggle('front', i === idx));
+  }
+  function restack() {
+    for (let i = 0; i < N; i++) applySlot(i, (i - active + N) % N);
+    setFront(active);
+  }
+  function updateInd(idx) { deckInd.textContent = ((idx == null ? active : idx) + 1) + ' / ' + N; }
+
+  /* ── navigation: fling the whole page out to the side, tuck it behind ── */
+  function go(dir) {                 // +1 next, -1 prev
+    if (isAnimating || N < 2) return;
+    isAnimating = true;
+
+    controllers[active].closeEntry();
+    const newActive = (active + dir + N) % N;
+    setFront(newActive);             // drives the mobile fade immediately
+    updateInd(newActive);            // flip the counter on press, not after it settles
+
+    if (dir > 0) {
+      // NEXT — throw front card up & out to the RIGHT
+      const out = cards[active];
+      out.style.zIndex = '999';
+      out.style.pointerEvents = 'none';
+      out.style.transform = THROW_NEXT;
+      for (let i = 0; i < N; i++) {
+        if (i === active) continue;
+        applySlot(i, (i - newActive + N) % N);
+      }
+      setTimeout(() => {
+        applySlot(active, (active - newActive + N) % N);  // back slot, low z — slides in behind
+        finish(newActive);
+      }, DUR);
+    } else {
+      // PREV — bring back card in from the LEFT, drop it into front
+      const inc = cards[newActive];
+      inc.style.zIndex = '999';
+      inc.style.pointerEvents = 'none';
+      inc.style.transform = THROW_PREV;
+      for (let i = 0; i < N; i++) {
+        if (i === newActive) continue;
+        applySlot(i, (i - newActive + N) % N);
+      }
+      setTimeout(() => {
+        applySlot(newActive, 0);                           // front slot, top z
+        finish(newActive);
+      }, DUR);
+    }
+  }
+
+  function finish(newActive) {
+    setTimeout(() => {
+      active = newActive;
+      isAnimating = false;
+      restack();
+      updateInd();
+    }, DUR);
+  }
+
+  /* ── wire it up ── */
+  prevBtn.addEventListener('click', () => go(-1));
+  nextBtn.addEventListener('click', () => go(1));
+  document.addEventListener('keydown', e => {
+    if      (e.key === 'ArrowRight') go(1);
+    else if (e.key === 'ArrowLeft')  go(-1);
+  });
+  document.addEventListener('click', e => {
+    const c = controllers[active];
+    if (c && c.activeId && !e.target.closest('.hs') &&
+        !e.target.closest('.col-notes') && !e.target.closest('.tender-overlay')) {
+      c.closeEntry();
+    }
+  });
+  if (N < 2) { prevBtn.disabled = true; nextBtn.disabled = true; }
+
+  // first paint
+  restack();
+  updateInd();
+</script>
+
+</body>
+</html>
