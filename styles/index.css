@@ -1,178 +1,78 @@
 @font-face {
     font-family: 'Signifier';
     src: url('signifier-bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'ABC';
-    src: url('ABCWhyteInktrapSemi-Mono-Regular.woff') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    src: url('ABCWhyteInktrapSemi-Mono-Regular.woff') format('woff');
+    font-display: swap;
 }
+
+* { box-sizing: border-box; }
 
 body {
     font-family: 'ABC', serif;
     background-color: #FEFFF8;
     color: #000;
+    font-size: 1rem;
     line-height: 1.6;
-    padding: 0 1rem;
-    max-width: 900px;
-    margin: 0 5rem;
-    margin-bottom: 0;
-    margin-left: 5rem;
-    margin-right: 10rem;
-    margin-top: 0;
-    /* max-height: 500px; */
+    margin: 0;
+    padding: 0 24px;
+}
+
+header, .content, .love {
+    width: min(660px, 100%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
-    font-family: 'Signifier', sans-serif;
+    font-family: 'Signifier', serif;
     font-size: 2.5rem;
     font-weight: bold;
     text-decoration: underline;
-    margin-bottom: 4rem;
+    margin-top: 8rem;
 }
 
-.content {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 3rem 2rem;
-}
+.content p { margin: 0; }
+.content { overflow-wrap: break-word; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
-.content h2 {
-    font-weight: normal;
-    font-size: 1rem;
-    margin: 0;
-}
-
-.content p {
-    margin: 0 0 1rem 0;
-}
-
-.content a {
-    color: #000;
-    /* text-decoration: underline; */
-}
-
+/* Keep the navigation 110px left of the centered reading column. */
 nav {
     position: absolute;
-    top: 20em;
-    right: 2rem;
-    /* margin-top:  */
-    margin-right: 3.5em;
-    text-align: right;
+    top: calc(20em + 15px);
+    right: calc(50% + 330px + 110px);
+    text-align: left;
 }
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav a {
-    text-decoration: none;
-}
-
-li a:hover {
-    text-decoration: underline;
-    text-decoration-color: black;
-    -o-transition:.4s;
-    -ms-transition:.4s;
-    -moz-transition:.4s;
-    -webkit-transition:.4s;
-    transition:.4s;
-}
-
-/* nav li {
-    margin-bottom: 0.5rem;
-} */
-
-nav a {
-    font-family: 'ABC', sans-serif;
-    /* text-decoration: underline; */
-}
-
-/* nav a:hover {
-    text-decoration: underline;
-} */
-
-footer {
-    /* margin-top: 50%; */
-    position: relative; 
-    /* bottom: 0;  */
-    /* padding-top: 9%; */
-    /* top: 100%; */
-    /* left:10px; */
-    /* position: absolute;
-    bottom: 0;
-    left: 10px; */
-    /* margin-top: auto; */
-    font-size: 0.6rem;
-    color: #666;
-}
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav a { text-decoration: none; }
+nav a:hover { text-decoration: underline; }
 
 .love {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    font-size: 0.8rem;
+    position: static;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: .8rem;
     color: #666;
-    margin: 0;
-    padding: 0;
-    z-index: 1000;
 }
 
-
-
-@media (max-width: 868px) {
-    body {
-        padding: 0 1rem;
-        margin: 1rem auto;
-    }
-
-    h1 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .content h2 {
-        margin-bottom: 0.5rem;
-    }
-
-    nav {
-        margin-left: 0;
-        top: 2em;
-        display: inline;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding-left: 0;
-    }
-
-
-
+/* Navigation joins the document flow before the heading on smaller screens. */
+@media (max-width: 1100px) {
+    .nav { width: min(660px, 100%); margin: 24px auto 0; }
+    nav { position: static; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+    nav a { display: inline-flex; align-items: center; min-height: 44px; }
+    h1 { margin-top: 2.5rem; }
 }
 
 @media (max-width: 480px) {
-    body {
-        font-size: 0.9rem;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    .content {
-        gap: 1rem;
-    }
-
+    body { padding: 0 22px; font-size: .9375rem; }
+    h1 { font-size: 1.8rem; margin-top: 2rem; }
+    .nav { margin-top: 16px; }
+    .love { margin-top: 2.5rem; margin-bottom: 2rem; }
 }
