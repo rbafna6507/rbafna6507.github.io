@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/projects.css">
     <!-- <link rel="stylesheet" href="styles/test.css"> -->
-    <title>My Playground of Projects</title>
+    <title>projects</title>
 </head>
 <body>
     <div class="container">
@@ -13,12 +13,86 @@
         
         <div class="project-box">
             <div class="project-text">
-                <h3 class="project-title"> Self-Balancing Robotic Cube </h3>
+                <h3 class="project-title"> Reaction Wheel Inverted Pendulum </h3>
                 <h4>[in progress]</h4>
-                <p class="project-desc">Currently hacking on a triple reaction wheel system that can balance a cube on a single corner. 
-                    Implementing a PID system for balance, learning how to 3D print for the cube body, and getting my feet wet with basic mechanical engineering skills. 
-                    Attempting to reverse engineer this <a href="https://www.youtube.com/watch?v=n_6p-1J551Y" target="_blank">Cubli</a>, a closed source self-balancing cube.</p>
+                <p class="project-desc">Currently hacking on a reaction wheel inverted pendulum that can balance itself. 
+                    Implementing a swingup controller, PID system, and ultimately an LQR for balance. Designing, building, wiring, and testing the entire system from scratch.  
+                    Currently learning CAD, electronics engineering, and the pain of picking the right parts. Checkout the <a href="https://github.com/rbafna6507/reaction_wheel_inverted_pendulum">simulation I made</a>.</p>
             </div>
+            <!-- Optional image: replace src and alt with your project photo.
+                 Remove this figure entirely for a text-only box. -->
+            <figure class="project-image">
+                <img src="images/projects/reaction_wheel_pendulum.png"
+                     alt="Project image placeholder" loading="lazy" decoding="async">
+            </figure>
+        </div>
+
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Rocket Landing Simulation </h3>
+                <h4>[in progress]</h4>
+                <p class="project-desc">Built out a simple rocket landing simulation to explore control theory and implmement my own PID system. Brushed off quite a bit of rust around my math and physics to make this physics accurate.
+                    Feel free to <a href="https://rbafna.com/rocket">check it out and play the simulation</a>. Built in Rust. <a href="https://github.com/rbafna6507/lunar_lander">Code here</a></p>
+            </div>
+            <!-- Optional image: replace src and alt with your project photo.
+                 Remove this figure entirely for a text-only box. -->
+            <figure class="project-image">
+                <img src="images/projects/rocket.png"
+                     alt="Project image placeholder" loading="lazy" decoding="async">
+            </figure>
+        </div>
+
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Rift - Peer-to-Peer File Transfer CLI </h3>
+                <h4>[in progress]</h4>
+                <p class="project-desc">Inspired by the inability to airdrop my friends files, I built Rift - a secure, blazing-fast, file transfer utility from scratch in Rust. 
+                    Fully featured - the CLI supports multithreaded concurrent file transfers, end-to-end encryption using PAKE (password authenticated key exchange), automatic compression of folders, file chunking, and real-time progress indicators.
+                    Completely self hosted on my raspberry pi.
+                    </p>
+            </div>
+            <!-- Optional image: replace src and alt with your project photo.
+                 Remove this figure entirely for a text-only box. -->
+            <figure class="project-image">
+                <img src="images/projects/rift.png"
+                     alt="Project image placeholder" loading="lazy" decoding="async">
+            </figure>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Skeeps Cam </h3>
+                <h4>[in progress]</h4>
+                <p class="project-desc">I hate waiting in line. We built a <a href="https://github.com/rbafna6507/skeeps_cam.git">nifity little website</a> that monitors the lines of the two most popular bars on Michigan's campus so 
+                    we'd know when to leave. Used a raspberry pi + 12MP camera and custom enclosure - "borrowed" a ladder to plug it into a lamp post across the street.
+                    Pi hosts app script that takes a picture and updates an "updated at" line in a Flask html file that we embedded into our website (tailscale funnel).
+                    </p>
+            </div>
+            <!-- Optional image: replace src and alt with your project photo.
+                 Remove this figure entirely for a text-only box. -->
+            <figure class="project-image">
+                <img src="images/projects/skeeps_cam.jpeg"
+                     alt="Project image placeholder" loading="lazy" decoding="async">
+            </figure>
+        </div>
+
+        <div class="project-box">
+            <div class="project-text">
+                <h3 class="project-title"> Monopoly Simulation </h3>
+                <h4>[in progress]</h4>
+                <p class="project-desc">Wanted to mathematically determine the best squares to land on and buy in Monopoly. Ran a simulation of 10,000 steps
+                    to generate a heat map of the most landed on spots. Built out CPU players to play against one another, buy properties, and play with different strategies
+                    to see how valuable different properties actually are over time. Hint: always buy orange.
+                    </p>
+            </div>
+            <!-- Optional image: replace src and alt with your project photo.
+                 Remove this figure entirely for a text-only box. -->
+            <figure class="project-image">
+                <img src="images/projects/monopoly.png"
+                     alt="Project image placeholder" loading="lazy" decoding="async">
+            </figure>
         </div>
 
         <div class="project-box">
@@ -28,6 +102,12 @@
                 <p class="project-desc">Implemented a C++ thread library on Unix, handling CPU booting, thread management, multi (50+) CPU management, timer and inter-processor interrupts, atomicity, and FIFO scheduling order.
                     Designed spin-locks, mutexes and conditional variables utilizing POSIX context management.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt.
+            <figure class="project-image">
+                <img src="images/projects/placeholder.svg"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+            -->
         </div>
 
         <div class="project-box">
@@ -36,8 +116,14 @@
                 <h4>[September 2024]</h4>
                 <p class="project-desc">Built a simulation using PyBullet's physics engine to explore different pathfinding algorithms 
                     in the context of robotics. Created an A* and Rapidly Exploring Random Trees (RRT) algorithm visualizer to inspect
-                    how the robot behaves under each enviornment across different paths and through obstacles. beep boop, code here.</p>
+                    how the robot behaves under each enviornment across different paths and through obstacles. beep boop, <a href="https://github.com/rbafna6507/kino_rrt">code here</a>.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt. -->
+            <figure class="project-image">
+                <img src="images/projects/kino_rrt.png"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+           
         </div>
 
         <div class="project-box">
@@ -48,6 +134,12 @@
                     Equipped the processor with register renaming, data forwarding, early branch resolution, an N-way superscalar, 
                     as well as handling for data/structural hazards. Code here.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt.
+            <figure class="project-image">
+                <img src="images/projects/placeholder.svg"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+            -->
         </div>
 
         <div class="project-box">
@@ -59,6 +151,12 @@
                     and Next.js frontend to inspect flight route optimization based on distance traveled,
                     fuel consumption, time taken, and overall environmental impact. peep the code.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt. -->
+            <figure class="project-image">
+                <img src="images/projects/flight_route_visualizer.png"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+           
         </div>
 
         <div class="project-box">
@@ -69,16 +167,28 @@
                     using NRF24L01 modules, built a custom flight controller (PID system), and laser cut the drone body. 
                     Inaugural flight ended in a devastating crash.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt. -->
+            <figure class="project-image">
+                <img src="images/projects/quadcopter.jpeg"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+           
         </div>
 
         <div class="project-box">
             <div class="project-text">
                 <h3 class="project-title"> Algorithmic Lo-Fi Music Generator </h3>
-                <h4>[in-progress]</h4>
+                <h4>[unfinished]</h4>
                 <p class="project-desc">Used Javascript (Tone.js + Next.js) to create algorithmically generated Lo-Fi music. Learning quite a bit of music theory
                     (chords, progressions), and how to dial in timing to create pleasantly sounding Lo-Fi. code coming soon.
                 </p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt.
+            <figure class="project-image">
+                <img src="images/projects/placeholder.svg"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+            -->
         </div>
 
         <div class="project-box">
@@ -88,6 +198,12 @@
                 <p class="project-desc">Informate scrapes news articles from the home pages of several popular news outlets and displays them in real time by pinging a self-made API.
                 </p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt.
+            <figure class="project-image">
+                <img src="images/projects/placeholder.svg"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+            -->
         </div>
 
         <div class="project-box">
@@ -96,6 +212,12 @@
                 <h4>[2020]</h4>
                 <p class="project-desc">A perfect beginner project. The game of hangman developed in python. This gave me an understanding of the logical processes and steps needed to code well. Became a hangman GOAT.</p>
             </div>
+            <!-- Optional image: uncomment, then replace src and alt. -->
+            <figure class="project-image">
+                <img src="images/projects/hangman_pic.png"
+                     alt="Describe your project image" loading="lazy" decoding="async">
+            </figure>
+           
         </div>
         
         <nav>
