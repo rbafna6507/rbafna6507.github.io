@@ -200,16 +200,22 @@ li a:hover {
     }
 
     nav {
-        margin-left: 0;
-        top: 2em;
-        display: inline;
+        position: static;
+        margin: 0 0 2rem;
+        text-align: left;
     }
 
     nav ul {
-        flex-direction: column;
-        /* gap: 0.5rem; */
-        gap: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1.25rem;
         padding-left: 0;
+    }
+
+    nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
     }
 
     .project-box {
