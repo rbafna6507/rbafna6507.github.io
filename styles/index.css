@@ -38,6 +38,7 @@ h1 {
 }
 
 .content p { margin: 0; }
+.content, .container { padding-top: 1.6em; }
 .content { overflow-wrap: break-word; }
 a { color: inherit; }
 a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
