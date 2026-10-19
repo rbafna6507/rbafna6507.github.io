@@ -11,6 +11,11 @@
     font-display: swap;
 }
 
+:root {
+    --reading-column-width: 660px;
+    --desktop-nav-right-offset: 440px;
+}
+
 * { box-sizing: border-box; }
 
 body {
@@ -24,7 +29,7 @@ body {
 }
 
 header, .content, .love {
-    width: min(660px, 100%);
+    width: min(var(--reading-column-width), 100%);
     margin-left: auto;
     margin-right: auto;
 }
@@ -33,6 +38,7 @@ h1 {
     font-family: 'Signifier', serif;
     font-size: 2.5rem;
     font-weight: bold;
+    line-height: 1.2;
     text-decoration: underline;
     margin-top: 8rem;
 }
@@ -43,11 +49,11 @@ h1 {
 a { color: inherit; }
 a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
-/* Keep the navigation 110px left of the centered reading column. */
+/* Keep navigation at the same offset from the centered reading column. */
 nav {
     position: absolute;
     top: calc(20em + 15px);
-    right: calc(50% + 330px + 110px);
+    right: calc(50% + var(--desktop-nav-right-offset));
     text-align: left;
 }
 nav ul { list-style: none; padding: 0; margin: 0; }
@@ -64,7 +70,7 @@ nav a:hover { text-decoration: underline; }
 
 /* Navigation joins the document flow before the heading on smaller screens. */
 @media (max-width: 1100px) {
-    .nav { width: min(660px, 100%); margin: 24px auto 0; }
+    .nav { width: min(var(--reading-column-width), 100%); margin: 24px auto 0; }
     nav { position: static; }
     nav ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
     nav a { display: inline-flex; align-items: center; min-height: 44px; }
